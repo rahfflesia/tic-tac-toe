@@ -21,7 +21,7 @@ html {
     align-items: center;
 }
 
-main {
+.game-board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
@@ -48,5 +48,39 @@ body h1 {
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
     font-weight: bold;
     color: #b86ded;
+}
+
+input, button{
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+input {
+    border: 2px solid #b86ded;
+    padding: 10px;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #b86ded;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+form {
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+form h1, p {
+    color: #c46ed4;
 }
 
