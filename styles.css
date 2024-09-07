@@ -31,7 +31,7 @@ html {
 
 body {
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     background: linear-gradient(#c46ed4,#b86ded, #4804dd);
     height: 100%;
 }
@@ -82,5 +82,20 @@ form {
 
 form h1, p {
     color: #c46ed4;
+}
+
+dialog {
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40%;
+    font-size: 3rem;
+    text-align: center;
+    padding: 20px;
+    outline: none;
+    min-width: 300px;
 }
 
