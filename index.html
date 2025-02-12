@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
-    <title>Tic Tac Toe</title>
-</head>
-<body class="center-flex">
+    <title>Gatito</title>
+  </head>
+  <body class="center-flex">
     <dialog>
-        <p class="dialog-paragraph"></p>
-        <button class="close">Close</button>
+      <p class="dialog-paragraph"></p>
+      <button class="close">Cerrar</button>
     </dialog>
-    <h1 style="display: none; font-size: 3.5rem;" class="title">Tic Tac Toe</h1>
-    <h1 style="display: none; font-size: 3.5rem;" class="intTurn"></h1>
-    <h1 style="display: none; font-size: 3.5rem;" class="currentTurn"></h1>
+    <h1 style="display: none; font-size: 3.5rem" class="title">Gatito</h1>
+    <h1 style="display: none; font-size: 3.5rem" class="intTurn"></h1>
+    <h1 style="display: none; font-size: 3.5rem" class="currentTurn"></h1>
     <main>
-        <form action="">
-            <h1>Tic Tac Toe</h1>
-            <p>Player1 Username</p>
-            <input type="text" placeholder="input player1 username" required id="username1">
-            <p>Player2 Username</p>
-            <input type="text" placeholder="input player2 username" required id="username2">
-            <button type="submit" class="play">Play</button>
-        </form>
+      <form action="">
+        <h1>Gatito</h1>
+        <p>Nombre de usuario del jugador 1</p>
+        <input
+          type="text"
+          placeholder="Nombre del jugador 1"
+          required
+          id="username1"
+        />
+        <p>Nombre de usuario del jugador 2</p>
+        <input
+          type="text"
+          placeholder="Nombre del jugador 2"
+          required
+          id="username2"
+        />
+        <button type="submit" class="play">Jugar</button>
+      </form>
     </main>
-</body>
+  </body>
 </html>
