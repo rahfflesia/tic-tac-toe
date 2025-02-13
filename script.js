@@ -28,14 +28,14 @@ function createPlayer(name, marker) {
 
 let player1;
 let player2;
-let currentTurn = 1;
+let currentTurn;
 
 const gameBoard = (function () {
   const createGameBoard = () => {
     title.style.display = "block";
     turn.style.display = "block";
     n.style.display = "block";
-    turn.textContent = "Turno número " + currentTurn;
+    turn.textContent = "Turno número " + intTurn;
     const button = document.createElement("button");
     button.textContent = "Reiniciar";
     button.style.gridColumn = "1 / -1";
@@ -128,12 +128,13 @@ const gameBoard = (function () {
 
 playButton.addEventListener("click", () => {
   if (username1.value.length > 0 && username2.value.length > 0) {
+    player1 = createPlayer(username1.value, "X");
+    player2 = createPlayer(username2.value, "O");
+    currentTurn = player1;
+    n.textContent = `Turno de ${currentTurn.name} (${currentTurn.marker})`;
     gameBoardContainer.removeChild(form);
     gameBoard.createGameBoard();
     cells = document.querySelectorAll(".cell");
-    player1 = createPlayer(username1.value, "X");
-    player2 = createPlayer(username2.value, "O");
-    currentTurn = player2;
     game.enableGameBoard();
     restartButton = document.querySelector(".restart");
     restartButton.addEventListener("click", () => {
@@ -151,12 +152,19 @@ const game = (function () {
     for (let i = 0; i < cells.length; i++) {
       cells[i].addEventListener("click", () => {
         if (cells[i].textContent.length < 1) {
-          n.textContent = "Turno de " + currentTurn.name;
-          game.checkTurn(intTurn);
           cells[i].textContent = currentTurn.getMarker();
+
+          if (currentTurn === player1) {
+            cells[i].style.color = "#1E90FF";
+          } else {
+            cells[i].style.color = "#c43333";
+          }
+
           game.checkWin();
           game.checkTie();
           intTurn++;
+          game.checkTurn(intTurn);
+          n.textContent = `Turno de ${currentTurn.name} (${currentTurn.marker})`;
           turn.textContent = "Turno número " + intTurn;
         }
       });
@@ -191,11 +199,13 @@ const game = (function () {
 
   const restart = () => {
     intTurn = 1;
+    currentTurn = player1;
     for (let i = 0; i < cells.length; i++) {
       cells[i].textContent = "";
     }
     n.textContent = "";
-    turn.textContent = "";
+    n.textContent = `Turno de ${currentTurn.name} (${currentTurn.marker})`;
+    turn.textContent = "Turno número " + intTurn;
   };
 
   return {
