@@ -1,3 +1,24 @@
+function palabraANumero(palabra) {
+  const mapa = {
+    uno: "1",
+    dos: "2",
+    tres: "3",
+    cuatro: "4",
+    cinco: "5",
+    seis: "6",
+    siete: "7",
+    ocho: "8",
+    nueve: "9",
+  };
+
+  palabra = palabra.toLowerCase().replace(/\./g, "");
+  return mapa[palabra] || palabra;
+}
+
+function esNumeroValido(numero) {
+  return /^[1-9]$/.test(numero);
+}
+
 const playButton = document.querySelector(".play");
 const gameBoardContainer = document.querySelector("main");
 const form = document.querySelector("form");
@@ -218,6 +239,61 @@ const game = (function () {
   };
 })();
 
+function iniciarReconocimiento(callback) {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    console.error("Tu navegador no soporta SpeechRecognition");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = "es-MX";
+  recognition.continuous = true;
+  recognition.interimResults = false;
+
+  recognition.onresult = (event) => {
+    const transcript =
+      event.results[event.results.length - 1][0].transcript.trim();
+    callback(transcript);
+  };
+
+  recognition.onerror = (event) => {
+    console.error("Error en reconocimiento de voz:", event.error);
+  };
+
+  recognition.onend = () => {
+    recognition.start();
+  };
+
+  recognition.start();
+}
+
 closeButton.addEventListener("click", () => {
   dialog.close();
+});
+
+iniciarReconocimiento((transcript) => {
+  let numero = palabraANumero(transcript);
+
+  if (esNumeroValido(numero)) {
+    if (cells[numero - 1].textContent.length < 1) {
+      if (currentTurn === player1) {
+        cells[numero - 1].style.color = "#1E90FF";
+      } else {
+        cells[numero - 1].style.color = "#c43333";
+      }
+      console.log(`Número reconocido: ${numero}`);
+      cells[numero - 1].textContent = currentTurn.getMarker();
+      game.checkWin();
+      game.checkTie();
+      intTurn++;
+      game.checkTurn(intTurn);
+      n.textContent = `Turno de ${currentTurn.name} (${currentTurn.marker})`;
+      turn.textContent = "Turno número " + intTurn;
+    }
+  } else {
+    console.log(`"${transcript}" no es un número válido`);
+  }
 });
